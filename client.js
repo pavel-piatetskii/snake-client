@@ -1,4 +1,5 @@
 const net = require('net');
+
 const connect = function() {
   const conn = net.createConnection({ 
     host: '135.23.222.131',
@@ -9,6 +10,11 @@ const connect = function() {
 
   conn.on('data', (data) => {
     console.log('Server says: ', data);
+  });
+
+  conn.on('connect', () => {
+    console.log('We have connected to the server!');
+    conn.write('Name: J&K');
   });
 
   return conn;
