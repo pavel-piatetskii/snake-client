@@ -1,5 +1,12 @@
+const { stdout } = require('process');
+const readline = require('readline');
 
- const setupInput = function(conn) {
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+const setupInput = function(conn) {
   connection = conn;
   const stdin = process.stdin;
   stdin.setRawMode(true);
@@ -9,9 +16,15 @@
   return stdin;
 }
 
+// const chatHandler = function() {
+// 
+//   });
+// }
+
 let connection;
 
 handleUserInput = function(stdin) {
+
   stdin.on('data', (key) => {   // Ctrl + c
     if (key === '\u0003') {
       process.exit();
@@ -39,6 +52,12 @@ handleUserInput = function(stdin) {
   stdin.on('data', (key) => {   // D
     if (key === 'd') {
       connection.write('Move: right');
+    }
+  });
+
+  stdin.on('data', (key) => {   // T (Chat)
+    if (key === 't') {
+      connection.write('Say: Hello everybody!');
     }
   });
 };
